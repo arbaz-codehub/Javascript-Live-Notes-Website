@@ -1,7 +1,7 @@
-# Live Notes Website
+# Learnify - Live Notes Website
 
 ## Overview
-Live Notes is a web application designed to help users manage and access their notes effectively. Built using HTML, CSS, JavaScript, and Firebase, the platform offers a seamless experience for users to register, log in, and view notes across various subjects.
+Learnify is a web application designed to help users manage and access their notes effectively. Built using HTML, CSS, JavaScript, and Firebase, the platform offers a seamless experience for users to register, log in, and view notes across various subjects.
 
 ## Features
 - **User Authentication**: 
