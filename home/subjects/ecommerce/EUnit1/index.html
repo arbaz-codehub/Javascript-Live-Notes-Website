@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Unit 1</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+      @media print {
+        html,
+        body {
+          display: none;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("keyup", (e) => {
+        navigator.clipboard.writeText("");
+        alert("Screenshot Disabled");
+      });
+    </script>
+    <script src="script.js" defer></script>
+    <script>
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="menu-icon">☰</div>
+    <div id="sidebar">
+      <h2>Chapters</h2>
+      <!-- <a href="#ecommerce" class="active">E-commerce Explained</a>
+        <a href="#features">Features of E-commerce</a>
+        <a href="#comparison">Traditional vs. E-commerce</a>
+        <a href="#pureVsPartial">Pure vs. Partial E-commerce</a>
+        <a href="#elements">Elements of E-commerce</a>
+        <a href="#types">Types of E-commerce</a> -->
+
+      <a href="#ecommerce" class="active">E-commerce</a>
+      <a href="#features">Features of E-commerce</a>
+      <a href="#comparison">Traditional Commerce vs. E-commerce</a>
+      <a href="#pureVsPartial">Pure and Partial Ecommerce</a>
+      <a href="#elements">Elements of Ecommerce</a>
+      <a href="#types">Types of E-commerce</a>
+      <a href="#benefits">Benefits of E-commerce</a>
+      <!-- <a href="#benefitsForOrganizations">Benefits for Organizations</a>
+      <a href="#benefitsForConsumers">Benefits for Consumers</a>
+      <a href="#benefitsForSociety">Benefits for Society</a> -->
+      <a href="#limitations">Limitations of E-commerce</a>
+      <a href="#ebusinessVsEcommerce">E-business vs. E-commerce</a>
+      <a href="#impacts">Impacts of Ecommerce</a>
+      <!-- <a href="#economicImpact">Economic Impact</a>
+      <a href="#socialImpact">Social Impact</a>
+      <a href="#environmentalImpact">Environmental Impact</a>
+      <a href="#technologicalImpact">Technological Impact</a> -->
+      <a href="#ecommerceInIndia">Ecommerce in India</a>
+      <a href="#currentScenario">Current Scenario of Ecommerce in India</a>
+      <a href="#futureProspects">Future Prospects of Ecommerce in India</a>
+      <a href="#anatomyOfEcommerce">Anatomy of Ecommerce</a>
+      <a href="#ecommerceFramework">Framework of Ecommerce</a>
+      <a href="#ecommerceConsumerApplications"
+        >Ecommerce Consumer Applications</a
+      >
+      <a href="#ecommerceOrganisationApplications"
+        >Ecommerce Organisation Applications</a
+      >
+
+      <h2>End</h2>
+    </div>
+    <div id="menu-tip" class="menu-tip"></div>
+
+    <div id="content">
+      <!-- Content will be dynamically loaded here -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <!-- Cryptojs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      function verifyJWT(token) {
+        try {
+          const [header, payload, signature] = token.split(".");
+          const decodedPayload = JSON.parse(atob(payload));
+
+          // Check expiration
+          if (decodedPayload.exp < Date.now()) {
+            return false;
+          }
+
+          // Verify signature
+          const calculatedSignature = btoa(
+            CryptoJS.HmacSHA256(
+              header + "." + payload,
+              "your-secret-key"
+            ).toString()
+          );
+          return calculatedSignature === signature;
+        } catch (error) {
+          console.error("JWT verification error:", error);
+          return false;
+        }
+      }
+
+      function checkAuth() {
+        const token = localStorage.getItem("auth_token");
+        if (!token || !verifyJWT(token)) {
+          // Invalid or expired token, redirect to login
+          localStorage.removeItem("auth_token"); // Clear invalid token
+          window.location.replace("../index.html");
+        } else {
+          // Valid token, show content
+          document.getElementById("content").style.display = "block";
+        }
+      }
+
+      // Check authentication only once when page loads
+      window.onload = checkAuth;
+    </script>
+  </body>
+</html>

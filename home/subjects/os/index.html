@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="loading"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+      "
+    >
+      <div
+        style="
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 10px;
+        "
+      ></div>
+      Loading PDF...
+    </div>
+
+    <div class="container">
+      <button class="pdf-btn" data-pdf="os1.pdf">OS Unit 1</button>
+      <button class="pdf-btn" data-pdf="os2.pdf">OS Unit 2</button>
+      <button class="pdf-btn" data-pdf="os3.pdf">OS Unit 3</button>
+      <button class="pdf-btn" data-pdf="os4.pdf">OS Unit 4</button>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Cryptojs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      function verifyJWT(token) {
+        try {
+          const [header, payload, signature] = token.split(".");
+          const decodedPayload = JSON.parse(atob(payload));
+
+          // Check expiration
+          if (decodedPayload.exp < Date.now()) {
+            return false;
+          }
+
+          // Verify signature
+          const calculatedSignature = btoa(
+            CryptoJS.HmacSHA256(
+              header + "." + payload,
+              "your-secret-key"
+            ).toString()
+          );
+          return calculatedSignature === signature;
+        } catch (error) {
+          console.error("JWT verification error:", error);
+          return false;
+        }
+      }
+
+      function checkAuth() {
+        const token = localStorage.getItem("auth_token");
+        if (!token || !verifyJWT(token)) {
+          // Invalid or expired token, redirect to login
+          localStorage.removeItem("auth_token"); // Clear invalid token
+          window.location.replace("../index.html");
+        } else {
+          // Valid token, show content
+          document.getElementById("content").style.display = "block";
+        }
+      }
+
+      // Check authentication only once when page loads
+      window.onload = checkAuth;
+    </script>
+  </body>
+</html>

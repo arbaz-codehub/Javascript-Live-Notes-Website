@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Learnify</title>
+    <!-- Cool Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400,500,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Our stylesheet -->
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <style>
+      @media print {
+        html,
+        body {
+          display: none;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("keyup", function (e) {
+        var keyCode = e.keyCode ? e.keyCode : e.which;
+        if (keyCode == 44) {
+          stopPrntScr();
+        }
+      });
+      function stopPrntScr() {
+        var inpFld = document.createElement("input");
+        inpFld.setAttribute("value", ".");
+        inpFld.setAttribute("width", "0");
+        inpFld.style.height = "0px";
+        inpFld.style.width = "0px";
+        inpFld.style.border = "0px";
+        document.body.appendChild(inpFld);
+        inpFld.select();
+        document.execCommand("copy");
+        inpFld.remove(inpFld);
+      }
+      function AccessClipboardData() {
+        try {
+          window.clipboardData.setData("text", "Access   Restricted");
+        } catch (err) {}
+      }
+      setInterval("AccessClipboardData()", 300);
+    </script>
+
+    <script>
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="content_container">
+      <div id="form_container">
+        <div id="form_header_container">
+          <h1 id="form_header">Login</h1>
+        </div>
+
+        <div id="form_content_container">
+          <div id="form_content_inner_container">
+            <input type="email" id="email" placeholder="Email" />
+            <input type="password" id="password" placeholder="Password" />
+            <div id="forgot_password_container">
+              <a href="#" id="forgot_password" class="forgot-password-link"
+                >Forgot Password?</a
+              >
+            </div>
+
+            <!-- Additional fields for registration (initially hidden) -->
+            <div id="register_fields" style="display: none">
+              <input type="text" id="full_name" placeholder="Full Name" />
+              <input
+                type="text"
+                id="access_code"
+                placeholder="Enter Access Code"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div id="button_container">
+          <button id="login_button" onclick="login()">Login</button>
+          <button
+            id="register_button"
+            onclick="register()"
+            style="display: none"
+          >
+            Register
+          </button>
+        </div>
+
+        <div id="switch_button_container">
+          <button id="switch_to_register">Switch to Register</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error_modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="error_message"></p>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <!-- Cryptojs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- Our script -->
+    <script src="index.js"></script>
+  </body>
+</html>

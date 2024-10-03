@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes by Arbaz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      @media print {
+        html,
+        body {
+          display: none;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("keyup", (e) => {
+        navigator.clipboard.writeText("");
+        alert("Screenshot Disabled");
+      });
+    </script>
+    <script>
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Notes by Arbaz</h1>
+      <p style="margin: -15px 0 20px 0">
+        Keep your browser update to run my site
+      </p>
+      <div class="button-container">
+        <a
+          href="./subjects/ecommerce/index.html"
+          class="button button-ecommerce"
+          >E-commerce</a
+        >
+        <a href="./subjects/os/index.html" class="button button-os"
+          >Operating System</a
+        >
+        <a href="./subjects/mis/index.html" class="button button-mis">MIS</a>
+        <a href="./subjects/stats/index.html" class="button button-statistics"
+          >Statistics</a
+        >
+        <a href="./subjects/asp/index.html" class="button button-aspnet"
+          >ASP.Net</a
+        >
+      </div>
+      <div class="flex">
+        <button class="logout ma" onclick="logout()">Log out!</button>
+      </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" /> -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <!-- Cryptojs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      function verifyJWT(token) {
+        try {
+          const [header, payload, signature] = token.split(".");
+          const decodedPayload = JSON.parse(atob(payload));
+
+          // Check expiration
+          if (decodedPayload.exp < Date.now()) {
+            return false;
+          }
+
+          // Verify signature
+          const calculatedSignature = btoa(
+            CryptoJS.HmacSHA256(
+              header + "." + payload,
+              "your-secret-key"
+            ).toString()
+          );
+          return calculatedSignature === signature;
+        } catch (error) {
+          console.error("JWT verification error:", error);
+          return false;
+        }
+      }
+
+      function checkAuth() {
+        const token = localStorage.getItem("auth_token");
+        if (!token || !verifyJWT(token)) {
+          // Invalid or expired token, redirect to login
+          localStorage.removeItem("auth_token"); // Clear invalid token
+          window.location.replace("../index.html");
+        } else {
+          // Valid token, show content
+          document.getElementById("content").style.display = "block";
+        }
+      }
+
+      // Check authentication only once when page loads
+      window.onload = checkAuth;
+    </script>
+    <script src="../index.js"></script>
+  </body>
+</html>

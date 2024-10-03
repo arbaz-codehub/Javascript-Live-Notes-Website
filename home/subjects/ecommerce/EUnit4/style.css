@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+#ecommerce {
+  margin-top: 30px;
+}
+
+h1, h2 {
+  color: #2c3e50;
+}
+
+h1 {
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.feature {
+  background-color: #ecf0f1;
+  border-left: 4px solid #3498db;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comparison {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.column-left, .column-right {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.column-left {
+  background-color: #fef9e7;
+  margin-right: 10px;
+}
+
+.column-right {
+  background-color: #e8f8f5;
+}
+
+#menu-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  font-size: 20px;
+  color: black;
+  transition: color 0.3s;
+}
+
+#menu-icon.menu-icon-open {
+  color: white;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #2c3e50;
+  transition: 0.3s;
+  padding-top: 60px;
+  overflow: scroll;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar a {
+  padding: 15px 25px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ecf0f1;
+  display: block;
+  transition: 0.3s;
+}
+
+#sidebar a:hover {
+  background-color: #34495e;
+}
+
+#sidebar a.active {
+  background-color: #3498db;
+}
+
+#sidebar h2 {
+  color: #ecf0f1;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ecf0f1;
+  margin: 0 25px;
+}
+
+#menu-tip {
+  position: fixed;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent transparent transparent #3498db;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+}
+
+#menu-icon.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+      padding: 20px;
+  }
+  .comparison {
+      flex-direction: column;
+  }
+  .column-left, .column-right {
+      margin-right: 0;
+      margin-bottom: 10px;
+  }
+  #sidebar {
+      width: 100%;
+      left: -100%;
+  }
+  #sidebar.open {
+      left: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+      padding: 20px;
+  }
+  .column-left, .column-right {
+      min-width: 200px;
+  }
+}

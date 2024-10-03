@@ -1,0 +1,276 @@
+/* Base styles */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+
+#content_container {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+}
+
+#form_container {
+  width: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#form_header_container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#form_header {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#form_content_container {
+  width: 100%;
+}
+
+#form_content_inner_container {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
+  outline: none;
+}
+
+#forgot_password_container {
+  text-align: right;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+.forgot-password-link {
+  font-size: 0.9rem;
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #764ba2;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+#button_container {
+  margin-top: 20px;
+}
+
+#button_container button,
+#switch_button_container button {
+  width: 100%;
+  padding: 15px;
+  background: #667eea;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#button_container button:hover,
+#switch_button_container button:hover {
+  background: #764ba2;
+}
+
+#switch_button_container {
+  margin-top: 20px;
+}
+
+#switch_button_container button {
+  background: #f0f0f0;
+  color: #333;
+}
+
+#switch_button_container button:hover {
+  background: #e0e0e0;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#error_message {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  /* Tablet and larger */
+  #content_container {
+    max-width: 600px;
+  }
+
+  #form_container {
+    padding: 50px;
+  }
+
+  #form_header {
+    font-size: 3rem;
+  }
+
+  input {
+    height: 55px;
+    font-size: 1.1rem;
+  }
+
+  #button_container button,
+  #switch_button_container button {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Phones */
+  #content_container {
+    padding: 15px;
+  }
+
+  #form_container {
+    padding: 30px;
+  }
+
+  #form_header {
+    font-size: 2rem;
+  }
+
+  input {
+    height: 45px;
+    font-size: 0.9rem;
+  }
+
+  #button_container button,
+  #switch_button_container button {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller phones */
+  #form_container {
+    padding: 20px;
+  }
+
+  #form_header {
+    font-size: 1.8rem;
+  }
+
+  input {
+    height: 40px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
+  #button_container button,
+  #switch_button_container button {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
+
+
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  display: none; /* Hide initially */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

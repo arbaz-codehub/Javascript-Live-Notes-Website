@@ -1,0 +1,110 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px; /* Adjust this value to add space around the container */
+  overflow: auto;
+  margin-inline: 20px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between list items */
+  width: 100%;
+  max-width: 800px; /* Increased max-width for larger screens */
+}
+
+.list li {
+  background: #fff;
+  padding: 40px 30px; /* Increased padding for larger buttons */
+  border-radius: 10px; /* Slightly larger border radius */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  font-size: 25px; /* Increased font size */
+  font-weight: 500; /* Bold font for emphasis */
+}
+
+.list li:hover {
+  background: #e0f7fa;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  transform: translateY(-5px);
+}
+
+.list li:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.1s forwards; /* Slightly longer animation */
+}
+
+.list li:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+.list li:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 0.5s forwards;
+}
+
+.list li:nth-child(4) {
+  animation: fadeInUp 0.6s ease-out 0.7s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px; /* Reduced padding on smaller screens */
+  }
+
+  .list {
+    gap: 15px; /* Slightly smaller gap on smaller screens */
+    max-width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .list li {
+    padding: 30px 20px; /* Reduced padding for smaller buttons */
+    font-size: 20px; /* Slightly smaller font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .list {
+    gap: 10px; /* Even smaller gap on very small screens */
+  }
+
+  .list li {
+    padding: 20px 15px; /* Further reduced padding */
+    font-size: 18px; /* Even smaller font size */
+  }
+}

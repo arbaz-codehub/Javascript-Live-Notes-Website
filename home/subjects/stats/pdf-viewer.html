@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Viewer</title>
+    <link rel="stylesheet" href="viewer.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .pdf-wrapper {
+        width: 100%;
+        height: 100vh;
+        overflow: auto;
+      }
+      #pdf-container {
+        display: inline-block;
+        min-width: 100%;
+        transform-origin: 0 0;
+      }
+      .zoom-controls {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="zoom-controls">
+      <button id="zoom-in">Zoom In</button>
+      <button id="zoom-out">Zoom Out</button>
+    </div>
+
+    <div class="pdf-wrapper">
+      <div id="pdf-container"></div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const pdfUrl = urlParams.get("file");
+      let pdfDoc = null;
+      let scale = 1;
+      let lastKnownScrollPosition = { x: 0, y: 0 };
+      let ticking = false;
+
+      const pdfContainer = document.getElementById("pdf-container");
+      const pdfWrapper = document.querySelector(".pdf-wrapper");
+
+      pdfjsLib.getDocument(pdfUrl).promise.then((pdfDoc_) => {
+        pdfDoc = pdfDoc_;
+        renderAllPages();
+      });
+
+      function renderAllPages() {
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+          renderPage(pageNum);
+        }
+      }
+
+      function renderPage(pageNum) {
+        pdfDoc.getPage(pageNum).then((page) => {
+          const viewport = page.getViewport({ scale: scale });
+
+          const canvas = document.createElement("canvas");
+          canvas.classList.add("pdf-page");
+          const ctx = canvas.getContext("2d");
+
+          const outputScale = window.devicePixelRatio || 1;
+
+          canvas.width = Math.floor(viewport.width * outputScale);
+          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.style.width = `${viewport.width}px`;
+          canvas.style.height = `${viewport.height}px`;
+
+          ctx.scale(outputScale, outputScale);
+
+          pdfContainer.appendChild(canvas);
+
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport,
+          };
+          page.render(renderContext);
+        });
+      }
+
+      function zoom(delta) {
+        const viewportCenterX =
+          pdfWrapper.scrollLeft + pdfWrapper.clientWidth / 2;
+        const viewportCenterY =
+          pdfWrapper.scrollTop + pdfWrapper.clientHeight / 2;
+
+        const zoomCenterX = viewportCenterX / scale;
+        const zoomCenterY = viewportCenterY / scale;
+
+        scale += delta;
+        scale = Math.max(0.5, Math.min(3, scale));
+
+        pdfContainer.style.transform = `scale(${scale})`;
+
+        const newScrollLeft = zoomCenterX * scale - pdfWrapper.clientWidth / 2;
+        const newScrollTop = zoomCenterY * scale - pdfWrapper.clientHeight / 2;
+
+        pdfWrapper.scrollLeft = newScrollLeft;
+        pdfWrapper.scrollTop = newScrollTop;
+
+        refreshPDF();
+      }
+
+      document.getElementById("zoom-in").addEventListener("click", () => {
+        zoom(0.2);
+      });
+
+      document.getElementById("zoom-out").addEventListener("click", () => {
+        zoom(-0.2);
+      });
+
+      function refreshPDF() {
+        pdfContainer.innerHTML = "";
+        renderAllPages();
+      }
+
+      function handleScroll() {
+        lastKnownScrollPosition = {
+          x: pdfWrapper.scrollLeft,
+          y: pdfWrapper.scrollTop,
+        };
+
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            ticking = false;
+          });
+
+          ticking = true;
+        }
+      }
+
+      pdfWrapper.addEventListener("scroll", handleScroll);
+
+      document.addEventListener("selectstart", (e) => e.preventDefault());
+      document.addEventListener("copy", (e) => e.preventDefault());
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+      window.addEventListener("beforeprint", (event) => {
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
