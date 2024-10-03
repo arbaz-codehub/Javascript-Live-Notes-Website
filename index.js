@@ -1,12 +1,13 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyAdsR_hHUR3-eiVoDVQ8zvHd4q9v7j8Pzc",
-  authDomain: "learnify-71314.firebaseapp.com",
-  projectId: "learnify-71314",
-  storageBucket: "learnify-71314.appspot.com",
-  messagingSenderId: "585016177509",
-  appId: "1:585016177509:web:edd8a22bfbd3ffb11c678c",
-  measurementId: "G-K5WC8GPBHD",
+  // Add your correct configs here...
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
