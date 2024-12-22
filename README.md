@@ -1,5 +1,7 @@
 # Learnify - Live Notes Website
 
+![Modern Firebase based Website](project1.png)
+
 ## Overview
 Learnify is a web application designed to help users manage and access their notes effectively. Built using HTML, CSS, JavaScript, and Firebase, the platform offers a seamless experience for users to register, log in, and view notes across various subjects.
 
